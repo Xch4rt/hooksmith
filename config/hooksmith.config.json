@@ -1,0 +1,10 @@
+{
+  "registry_path": "registry.json",
+  "llm_fallback": {
+    "enabled": false,
+    "model": "claude-haiku-4-5-20251001",
+    "timeout_ms": 4000
+  },
+  "auto_deny_patterns": [],
+  "risk_display": "full"
+}

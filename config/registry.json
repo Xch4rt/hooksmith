@@ -1,0 +1,209 @@
+{
+  "curl": {
+    "summary": "Hace una petición HTTP(S)",
+    "risk": "yellow",
+    "flags": {
+      "--resolve": { "explain": "fuerza el DNS del host a una IP concreta, salteando DNS/CDN (bypass Cloudflare, pega al origin directo)", "risk": "yellow" },
+      "-o": { "explain": "guarda la respuesta en un archivo (o /dev/null para descartar el body)", "risk": "green" },
+      "-O": { "explain": "guarda la respuesta usando el nombre remoto del archivo", "risk": "green" },
+      "-w": { "explain": "imprime métricas con formato (código HTTP, tiempos)", "risk": "green" },
+      "-s": { "explain": "modo silencioso (sin barra de progreso)", "risk": "green" },
+      "-S": { "explain": "muestra errores aunque esté en modo silencioso", "risk": "green" },
+      "-m": { "explain": "timeout total en segundos", "risk": "green" },
+      "-L": { "explain": "sigue redirecciones", "risk": "green" },
+      "-X": { "explain": "método HTTP explícito (GET/POST/DELETE...)", "risk": "yellow" },
+      "-d": { "explain": "envía un body (POST)", "risk": "yellow" },
+      "-H": { "explain": "agrega una cabecera HTTP", "risk": "green" },
+      "-k": { "explain": "ignora la validación del certificado TLS (inseguro)", "risk": "red" },
+      "--insecure": { "explain": "ignora la validación del certificado TLS (inseguro)", "risk": "red" }
+    }
+  },
+  "wget": {
+    "summary": "Descarga archivos por HTTP(S)/FTP",
+    "risk": "yellow",
+    "flags": {
+      "-O": { "explain": "guarda con un nombre de archivo específico", "risk": "green" },
+      "-q": { "explain": "modo silencioso", "risk": "green" },
+      "--no-check-certificate": { "explain": "ignora la validación del certificado TLS (inseguro)", "risk": "red" }
+    }
+  },
+  "git": {
+    "summary": "Operación de control de versiones",
+    "risk": "green",
+    "subcommands": {
+      "status": { "summary": "muestra el estado del working tree", "risk": "green" },
+      "diff": { "summary": "muestra cambios", "risk": "green" },
+      "log": { "summary": "muestra el historial", "risk": "green" },
+      "add": { "summary": "agrega cambios al stage", "risk": "green" },
+      "commit": { "summary": "crea un commit", "risk": "green" },
+      "checkout": { "summary": "cambia de rama o restaura archivos", "risk": "yellow" },
+      "switch": { "summary": "cambia de rama", "risk": "green" },
+      "pull": { "summary": "trae y fusiona cambios remotos", "risk": "yellow" },
+      "fetch": { "summary": "trae cambios remotos sin fusionar", "risk": "green" },
+      "push": { "summary": "sube commits al remoto", "risk": "yellow" },
+      "reset": { "summary": "mueve HEAD / des-stagea (con --hard descarta cambios)", "risk": "yellow" },
+      "clean": { "summary": "elimina archivos no rastreados (-fdx es destructivo)", "risk": "yellow" },
+      "rebase": { "summary": "reescribe historia de commits", "risk": "yellow" },
+      "stash": { "summary": "guarda cambios temporalmente", "risk": "green" }
+    },
+    "flags": {
+      "--force": { "explain": "fuerza la operación pisando protecciones (destructivo en push)", "risk": "red" },
+      "-f": { "explain": "fuerza la operación pisando protecciones", "risk": "yellow" },
+      "--force-with-lease": { "explain": "force-push seguro: falla si el remoto cambió", "risk": "yellow" },
+      "--hard": { "explain": "descarta cambios del working tree y del index", "risk": "red" },
+      "-fdx": { "explain": "elimina archivos no rastreados e ignorados sin confirmación", "risk": "red" }
+    }
+  },
+  "docker": {
+    "summary": "Gestiona contenedores/imágenes Docker",
+    "risk": "yellow",
+    "subcommands": {
+      "ps": { "summary": "lista contenedores", "risk": "green" },
+      "images": { "summary": "lista imágenes", "risk": "green" },
+      "logs": { "summary": "muestra logs de un contenedor", "risk": "green" },
+      "build": { "summary": "construye una imagen", "risk": "yellow" },
+      "run": { "summary": "crea y arranca un contenedor", "risk": "yellow" },
+      "exec": { "summary": "ejecuta un comando dentro de un contenedor", "risk": "yellow" },
+      "up": { "summary": "levanta servicios de compose", "risk": "yellow" },
+      "down": { "summary": "baja servicios de compose (borra contenedores)", "risk": "yellow" },
+      "restart": { "summary": "reinicia contenedores", "risk": "yellow" },
+      "stop": { "summary": "detiene contenedores", "risk": "yellow" },
+      "rm": { "summary": "elimina contenedores", "risk": "yellow" },
+      "rmi": { "summary": "elimina imágenes", "risk": "yellow" },
+      "prune": { "summary": "elimina recursos no usados (destructivo)", "risk": "red" },
+      "system": { "summary": "administración del daemon (prune borra todo lo no usado)", "risk": "yellow" }
+    }
+  },
+  "ssh": {
+    "summary": "Conexión remota por SSH (ejecuta un comando en el host destino)",
+    "risk": "yellow"
+  },
+  "scp": {
+    "summary": "Copia archivos por SSH entre local y un host remoto",
+    "risk": "yellow"
+  },
+  "rsync": {
+    "summary": "Sincroniza archivos/directorios (local o remoto)",
+    "risk": "yellow",
+    "flags": {
+      "--delete": { "explain": "borra en destino lo que no está en origen", "risk": "red" }
+    }
+  },
+  "psql": {
+    "summary": "Cliente de PostgreSQL",
+    "risk": "yellow",
+    "flags": {
+      "-c": { "explain": "ejecuta una sentencia SQL (ojo DDL/DML)", "risk": "yellow" }
+    }
+  },
+  "mysql": {
+    "summary": "Cliente de MySQL",
+    "risk": "yellow",
+    "flags": {
+      "-e": { "explain": "ejecuta una sentencia SQL (ojo DDL/DML)", "risk": "yellow" }
+    }
+  },
+  "systemctl": {
+    "summary": "Controla servicios de systemd",
+    "risk": "yellow",
+    "subcommands": {
+      "status": { "summary": "muestra el estado de un servicio", "risk": "green" },
+      "start": { "summary": "arranca un servicio", "risk": "yellow" },
+      "stop": { "summary": "detiene un servicio", "risk": "yellow" },
+      "restart": { "summary": "reinicia un servicio", "risk": "yellow" },
+      "reload": { "summary": "recarga la configuración de un servicio", "risk": "yellow" },
+      "enable": { "summary": "habilita un servicio en el arranque", "risk": "yellow" },
+      "disable": { "summary": "deshabilita un servicio en el arranque", "risk": "yellow" }
+    }
+  },
+  "caddy": {
+    "summary": "Servidor web Caddy",
+    "risk": "yellow",
+    "subcommands": {
+      "reload": { "summary": "recarga la configuración", "risk": "yellow" },
+      "restart": { "summary": "reinicia el servidor", "risk": "yellow" },
+      "stop": { "summary": "detiene el servidor", "risk": "yellow" }
+    }
+  },
+  "nginx": {
+    "summary": "Servidor web nginx",
+    "risk": "yellow",
+    "flags": {
+      "-s": { "explain": "envía una señal (reload/stop/quit/reopen)", "risk": "yellow" },
+      "-t": { "explain": "testea la configuración", "risk": "green" }
+    }
+  },
+  "npm": {
+    "summary": "Gestor de paquetes de Node",
+    "risk": "yellow",
+    "subcommands": {
+      "install": { "summary": "instala dependencias (accede a la red, corre scripts)", "risk": "yellow" },
+      "ci": { "summary": "instala desde el lockfile", "risk": "yellow" },
+      "run": { "summary": "ejecuta un script del package.json", "risk": "yellow" },
+      "test": { "summary": "corre los tests", "risk": "green" },
+      "publish": { "summary": "publica el paquete al registry", "risk": "red" }
+    }
+  },
+  "pnpm": {
+    "summary": "Gestor de paquetes pnpm",
+    "risk": "yellow",
+    "subcommands": {
+      "install": { "summary": "instala dependencias", "risk": "yellow" },
+      "run": { "summary": "ejecuta un script", "risk": "yellow" },
+      "add": { "summary": "agrega una dependencia", "risk": "yellow" }
+    }
+  },
+  "yarn": {
+    "summary": "Gestor de paquetes Yarn",
+    "risk": "yellow",
+    "subcommands": {
+      "install": { "summary": "instala dependencias", "risk": "yellow" },
+      "add": { "summary": "agrega una dependencia", "risk": "yellow" }
+    }
+  },
+  "ls": { "summary": "Lista archivos y directorios", "risk": "green" },
+  "cat": { "summary": "Muestra el contenido de archivos", "risk": "green" },
+  "echo": { "summary": "Imprime texto", "risk": "green" },
+  "pwd": { "summary": "Muestra el directorio actual", "risk": "green" },
+  "cd": { "summary": "Cambia de directorio", "risk": "green" },
+  "grep": { "summary": "Busca patrones en texto", "risk": "green" },
+  "find": { "summary": "Busca archivos", "risk": "green" },
+  "which": { "summary": "Ubica un ejecutable en el PATH", "risk": "green" },
+  "head": { "summary": "Muestra las primeras líneas de un archivo", "risk": "green" },
+  "tail": { "summary": "Muestra las últimas líneas de un archivo", "risk": "green" },
+  "mkdir": { "summary": "Crea directorios", "risk": "green" },
+  "touch": { "summary": "Crea archivos vacíos / actualiza timestamps", "risk": "green" },
+  "cp": { "summary": "Copia archivos", "risk": "yellow" },
+  "mv": { "summary": "Mueve o renombra archivos (puede sobrescribir)", "risk": "yellow" },
+  "rm": {
+    "summary": "Elimina archivos/directorios",
+    "risk": "yellow",
+    "flags": {
+      "-r": { "explain": "recursivo: borra directorios y su contenido", "risk": "yellow" },
+      "-f": { "explain": "fuerza el borrado sin confirmar", "risk": "yellow" },
+      "-rf": { "explain": "recursivo y forzado: destructivo", "risk": "red" }
+    }
+  },
+  "chmod": {
+    "summary": "Cambia permisos de archivos",
+    "risk": "yellow"
+  },
+  "chown": {
+    "summary": "Cambia el dueño de archivos",
+    "risk": "yellow"
+  },
+  "dd": {
+    "summary": "Copia datos a bajo nivel (bloques)",
+    "risk": "red"
+  },
+  "mkfs": {
+    "summary": "Formatea un sistema de archivos",
+    "risk": "red"
+  },
+  "kill": { "summary": "Envía una señal a un proceso", "risk": "yellow" },
+  "sh": { "summary": "Ejecuta un shell / script", "risk": "yellow" },
+  "bash": { "summary": "Ejecuta un shell / script", "risk": "yellow" },
+  "node": { "summary": "Ejecuta código JavaScript con Node", "risk": "yellow" },
+  "python": { "summary": "Ejecuta código Python", "risk": "yellow" },
+  "python3": { "summary": "Ejecuta código Python", "risk": "yellow" }
+}
